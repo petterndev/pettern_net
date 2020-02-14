@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dog BCS</title>
+    <link href="../static/pettern.css" rel="stylesheet">
+    <link href="http://localhost:5000/"></link>
+    <!-- <link rel="stylesheet" href="pettern.css"> -->
+</head>
+
+<body>
+    <h1>Check your dog's BCS</h1>
+    <p id="date"></p>
+    <script>
+        var loadFile = function(event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
+
+
+
+    <div>
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <p><label id="select" for="file" style="cursor: pointer;">Upload image</label></p>
+                <p><input id="file" name="dog" type="file" accept="image/*" onchange="loadFile(event)" style="display: none;" class="form-control"></p>
+            </div>
+
+            <p><img id="output" class="form-control" name="image" /></p>
+
+
+            <p><button id="submit" type="submit">submit</p>
+            <!-- <input type="submit"> -->
+            <!-- <button>Send the file</button> -->
+        </form>
+
+    </div>
+    <p id="bcs" name="bcs">
+        <!-- {% if bcs!=none %} -->
+        <h5 class="text-center mt-3"> result: {{ bcs }}</h5>
+        <!-- {% endif %} -->
+    </p>
+
+    <script>
+        var bcs = "{{ bcs }}"
+
+        function msg() {
+            var image = document.getElementById('output');
+            image.src = "{{url_for( 'static', filename = 'pet.png' )}}";
+        }
+
+        function msg2() {
+            var image = document.getElementById('output');
+            image.src = "{{ url_for( 'static', filename = image )}}";
+        }
+        if (bcs != "fat" && bcs != "slim" && bcs != "normal") {
+            window.onload = msg;
+        } else {
+            window.onload = msg2;
+        }
+    </script>
+    <!-- <form id="form1" action="uploadForm" method="post" enctype="multipart/form-data" target="repacatFrame">
+        <input type="file" name="file">
+        <input type="submit">
+    </form> -->
+    <!-- <script src="index.js"></script>
+    <noscript>You need to enable JavaScript to view the full site.</noscript> -->
+</body>
+
+</html>
